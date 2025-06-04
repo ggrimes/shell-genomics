@@ -171,7 +171,13 @@ in our FASTQ files that contain
 'NNNNNNNNNN' to another file called `bad_reads.txt`.
 
 ```bash
-$ grep -B1 -A2 NNNNNNNNNN SRR098026.fastq > bad_reads.txt
+$ grep -B1 -A2 --no-group-separator NNNNNNNNNN SRR098026.fastq > bad_reads.txt
+```
+
+If your version of `grep` does not recognise `--no-group-separator`, you can use:
+
+```bash
+$ grep -B1 -A2 NNNNNNNNNN SRR098026.fastq | grep -v '^--' > bad_reads.txt
 ```
 
 :::::::::::::::::::::::::::::::::::::::::  callout
@@ -424,7 +430,13 @@ CNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
 
 The fifth and six lines in the output display "--" which is the default action for `grep` to separate groups of
 lines matching the pattern, and indicate groups of lines which did not match the pattern so are not displayed.
-To fix this issue, we can redirect the output of grep to a second instance of `grep` as follows.
+On systems where `grep` provides the `--no-group-separator` option, you can avoid these extra lines by using it:
+
+```bash
+$ grep -B1 -A2 --no-group-separator NNNNNNNNNN SRR098026.fastq > bad_reads.fastq
+```
+
+If that option is not available, you can filter the output by piping it to a second `grep` as follows.
 
 ```bash
 $ grep -B1 -A2 NNNNNNNNNN SRR098026.fastq | grep -v '^--' > bad_reads.fastq
@@ -454,7 +466,8 @@ not interpret the pattern as an extended option (starting with --).
 ## Custom `grep` control
 
 Use `man grep` to read more about other options to customize the output of `grep` including extended options,
-anchoring characters, and much more.
+anchoring characters, and much more. Some systems also support the option `--no-group-separator` to suppress
+the `--` separator lines shown above.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 

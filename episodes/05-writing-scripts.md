@@ -153,7 +153,7 @@ $ nano bad-reads-script.sh
 Bad reads have a lot of N's, so we're going to look for  `NNNNNNNNNN` with `grep`. We want the whole FASTQ record, so we're also going to get the one line above the sequence and the two lines below. We also want to look in all the files that end with `.fastq`, so we're going to use the `*` wildcard.
 
 ```bash
-grep -B1 -A2 -h NNNNNNNNNN *.fastq | grep -v '^--' > scripted_bad_reads.txt
+grep -B1 -A2 -h --no-group-separator NNNNNNNNNN *.fastq > scripted_bad_reads.txt
 ```
 
 :::::::::::::::::::::::::::::::::::::::::  callout
@@ -161,7 +161,7 @@ grep -B1 -A2 -h NNNNNNNNNN *.fastq | grep -v '^--' > scripted_bad_reads.txt
 ## Custom `grep` control
 
 We introduced the `-v` option in [the previous episode](04-redirection.md), now we
-are using `-h` to "Suppress the prefixing of file names on output" according to the documentation shown by `man grep`.
+are using `-h` to "Suppress the prefixing of file names on output" according to the documentation shown by `man grep`. If your `grep` does not recognise `--no-group-separator`, you can instead pipe the output through `grep -v '^--'`.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
