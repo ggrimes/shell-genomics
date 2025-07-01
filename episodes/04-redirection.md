@@ -114,7 +114,6 @@ $ grep -w ZDB16 SraRunTable.txt
 SAMN00205563    0       SINGLE  ZDB16   29-May-14       606     424     25-Mar-11       SRR098031       SRS167171       ZDB16   WGS     <not provided>  PRJNA188723     MSU     public  Escherichia coli B str. REL606  ILLUMINA        SRP004752       <not provided>  <not provided>  <not provided>  REL606
 ```
 
-
 ### Case-insensitive matching
 
 By default, `grep` is case-sensitive. This means that `SINGLE` is different from `single`. Let's see:
